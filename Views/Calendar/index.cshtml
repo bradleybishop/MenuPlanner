@@ -1,0 +1,40 @@
+@model MenuPlanner.Models.CalendarViewModel
+@{
+    ViewData["Title"] = "Calendar";
+}
+
+<div class="text-center">
+    <h1 class="display-4">@String.Format("{0} {1}",
+        System.Globalization.CultureInfo.CurrentCulture.DateTimeFormat.GetMonthName(DateTime.Now.Month),
+        DateTime.Now.Year)</h1>
+</div>
+<div>
+    <table class="table-bordered calendar-display" style="width:100%">
+        <tr>
+            <th>Sunday</th>
+            <th>Monday</th>
+            <th>Tuesday</th>
+            <th>Wednesday</th>
+            <th>Thursday</th>
+            <th>Friday</th>
+            <th>Saturday</th>
+        </tr>
+        @foreach (var calendarWeek in Model.Weeks)
+        {
+            <tr>
+                @foreach (var calendarDay in calendarWeek.Days)
+                {
+                    <td>
+                        <div>
+                            @if (calendarDay.IsFilled)
+                            {
+                                <h3>@calendarDay.Date</h3>
+                            }
+                            &nbsp;
+                        </div>
+                    </td>
+                }
+            </tr>
+        }
+    </table>
+</div>
